@@ -6,6 +6,7 @@ from app.core.dependencies import get_current_user
 from app.routes.doctors import router as doctors_router
 from app.routes.patients import router as patients_router
 from app.routes.appointments import router as appointments_router
+from app.routes.monitoring import router as monitoring_router
 
 app = FastAPI(
     title="Hospital Appointment System",
@@ -19,7 +20,7 @@ app.include_router(auth_router)
 app.include_router(doctors_router)
 app.include_router(patients_router)
 app.include_router(appointments_router)
-
+app.include_router(monitoring_router)
 
 @app.get("/")
 def root():
