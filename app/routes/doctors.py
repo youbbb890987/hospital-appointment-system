@@ -4,11 +4,14 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.models.doctor import Doctor
 from app.schemas.doctor import DoctorCreate, DoctorResponse
-from app.cache.redis_cache import get_cache, set_cache
+from app.cache.redis_cache import get_cache, set_cache, clear_cache
 
 router = APIRouter(prefix="/doctors", tags=["Doctors"])
 
 
+# =========================
+# CREATE DOCTOR
+# =========================
 @router.post("/", response_model=DoctorResponse)
 def create_doctor(
     doctor: DoctorCreate,
@@ -35,16 +38,15 @@ def create_doctor(
     db.commit()
     db.refresh(new_doctor)
 
+    # 🧹 clear cache
+    clear_cache("all_doctors")
+
     return new_doctor
 
 
-@router.get("/", response_model=list[DoctorResponse])
-def get_all_doctors(
-    db: Session = Depends(get_db)
-):
-    doctors = db.query(Doctor).all()
-    return doctors
-
+# =========================
+# GET ALL DOCTORS (WITH CACHE)
+# =========================
 @router.get("/", response_model=list[DoctorResponse])
 def get_all_doctors(
     db: Session = Depends(get_db)
@@ -56,10 +58,46 @@ def get_all_doctors(
 
     doctors = db.query(Doctor).all()
 
-    set_cache("all_doctors", doctors)
+    result = [
+        {
+            "id": d.id,
+            "name": d.name,
+            "specialization": d.specialization,
+            "phone": d.phone,
+            "email": d.email
+        }
+        for d in doctors
+    ]
 
-    return doctors
+    set_cache("all_doctors", result)
 
+    return result
+
+
+# =========================
+# GET DOCTOR BY ID
+# =========================
+@router.get("/{doctor_id}", response_model=DoctorResponse)
+def get_doctor_by_id(
+    doctor_id: int,
+    db: Session = Depends(get_db)
+):
+    doctor = db.query(Doctor).filter(
+        Doctor.id == doctor_id
+    ).first()
+
+    if not doctor:
+        raise HTTPException(
+            status_code=404,
+            detail="Doctor not found"
+        )
+
+    return doctor
+
+
+# =========================
+# UPDATE DOCTOR
+# =========================
 @router.put("/{doctor_id}", response_model=DoctorResponse)
 def update_doctor(
     doctor_id: int,
@@ -84,9 +122,15 @@ def update_doctor(
     db.commit()
     db.refresh(db_doctor)
 
+    # 🧹 clear cache
+    clear_cache("all_doctors")
+
     return db_doctor
 
 
+# =========================
+# DELETE DOCTOR
+# =========================
 @router.delete("/{doctor_id}")
 def delete_doctor(
     doctor_id: int,
@@ -104,6 +148,9 @@ def delete_doctor(
 
     db.delete(db_doctor)
     db.commit()
+
+    # 🧹 clear cache
+    clear_cache("all_doctors")
 
     return {
         "message": "Doctor deleted successfully"
