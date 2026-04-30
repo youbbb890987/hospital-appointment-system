@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hospital System</title>
+
+<style>
+body { font-family: Arial; margin:0; background:#eef2f7; }
+
+.navbar {
+    background:#1f2d3d;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    color:white;
+}
+
+.navbar button {
+    background:#3498db;
+    border:none;
+    padding:8px;
+    color:white;
+    cursor:pointer;
+}
+
+.container { padding:20px; }
+
+.card {
+    background:white;
+    padding:20px;
+    margin:10px auto;
+    width:400px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+input, select {
+    width:100%;
+    padding:8px;
+    margin:5px 0;
+}
+
+button {
+    width:100%;
+    padding:10px;
+    background:#27ae60;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+.delete { background:red; }
+.update { background:orange; }
+
+ul { list-style:none; padding:0; }
+
+li {
+    background:#ecf0f1;
+    margin:5px 0;
+    padding:10px;
+}
+
+.hidden { display:none; }
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div>Hospital System</div>
+    <div>
+        <button onclick="show('login')">Login</button>
+        <button onclick="show('register')">Register</button>
+        <button onclick="show('doctors')">Doctors</button>
+        <button onclick="show('patients')">Patients</button>
+        <button onclick="show('appointments')">Appointments</button>
+        <button onclick="show('monitor')">Monitoring</button>
+    </div>
+</div>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div id="login" class="card">
+    <h2>Login</h2>
+    <input id="email" placeholder="Email">
+    <input id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+</div>
+
+<!-- REGISTER -->
+<div id="register" class="card hidden">
+    <h2>Register</h2>
+    <input id="r_name" placeholder="Name">
+    <input id="r_email" placeholder="Email">
+    <input id="r_password" placeholder="Password">
+    <select id="r_role">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+    </select>
+    <button onclick="register()">Register</button>
+</div>
+
+<!-- DOCTORS -->
+<div id="doctors" class="card hidden">
+    <h2>Doctors</h2>
+    <button onclick="getDoctors()">Load</button>
+    <ul id="doctorsList"></ul>
+
+    <h3>Add</h3>
+    <input id="d_name" placeholder="Name">
+    <input id="d_spec" placeholder="Specialization">
+    <input id="d_phone" placeholder="Phone">
+    <input id="d_email" placeholder="Email">
+    <button onclick="addDoctor()">Add</button>
+</div>
+
+<!-- EDIT DOCTOR -->
+<div id="editDoctor" class="card hidden">
+    <h2>Edit Doctor</h2>
+    <input id="edit_id" hidden>
+    <input id="edit_name">
+    <input id="edit_spec">
+    <input id="edit_phone">
+    <input id="edit_email">
+    <button onclick="saveDoctor()">Save</button>
+</div>
+
+<!-- PATIENTS -->
+<div id="patients" class="card hidden">
+    <h2>Patients</h2>
+    <button onclick="getPatients()">Load</button>
+    <ul id="patientsList"></ul>
+
+    <input id="p_name" placeholder="Name">
+    <input id="p_age" placeholder="Age">
+    <input id="p_gender" placeholder="Gender">
+    <input id="p_phone" placeholder="Phone">
+    <button onclick="addPatient()">Add</button>
+</div>
+
+<!-- APPOINTMENTS -->
+<div id="appointments" class="card hidden">
+    <h2>Appointments</h2>
+    <button onclick="getAppointments()">Load</button>
+    <ul id="appointmentsList"></ul>
+
+    <input id="a_patient" placeholder="Patient ID">
+    <input id="a_doctor" placeholder="Doctor ID">
+    <input id="a_date" placeholder="Date">
+    <button onclick="addAppointment()">Add</button>
+</div>
+
+<!-- MONITORING -->
+<div id="monitor" class="card hidden">
+    <h2>Monitoring</h2>
+    <button onclick="getStats()">Get Stats</button>
+    <button onclick="getLogs()">Get Logs</button>
+    <pre id="monitorOutput"></pre>
+</div>
+
+</div>
+
+<script>
+const API = "http://127.0.0.1:8000";
+
+function show(s){
+    ["login","register","doctors","patients","appointments","monitor","editDoctor"]
+    .forEach(id=>document.getElementById(id).classList.add("hidden"));
+
+    document.getElementById(s).classList.remove("hidden");
+}
+
+function parseJwt(t){ return JSON.parse(atob(t.split('.')[1])); }
+function getRole(){
+    let t=localStorage.getItem("token");
+    return t?parseJwt(t).role:null;
+}
+
+// LOGIN
+async function login(){
+    let f=new URLSearchParams();
+    f.append("username",email.value);
+    f.append("password",password.value);
+
+    let r=await fetch(API+"/login",{method:"POST",
+    headers:{"Content-Type":"application/x-www-form-urlencoded"},body:f});
+
+    let d=await r.json();
+    localStorage.setItem("token",d.access_token);
+
+    show("doctors");
+    getDoctors();
+}
+
+// REGISTER
+async function register(){
+    await fetch(API+"/register",{method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+        name:r_name.value,
+        email:r_email.value,
+        password:r_password.value,
+        role:r_role.value
+    })});
+    alert("Registered");
+}
+
+// DOCTORS
+async function getDoctors(){
+    let role=getRole();
+    let r=await fetch(API+"/doctors/");
+    let d=await r.json();
+
+    doctorsList.innerHTML="";
+    d.forEach(x=>{
+        let li=document.createElement("li");
+        li.innerHTML=x.name;
+
+        if(role==="admin"){
+            let del=document.createElement("button");
+            del.textContent="Delete";
+            del.className="delete";
+            del.onclick=()=>deleteDoctor(x.id);
+
+            let upd=document.createElement("button");
+            upd.textContent="Edit";
+            upd.className="update";
+            upd.onclick=()=>openEdit(x);
+
+            li.appendChild(del);
+            li.appendChild(upd);
+        }
+
+        doctorsList.appendChild(li);
+    });
+}
+
+function openEdit(d){
+    show("editDoctor");
+    edit_id.value=d.id;
+    edit_name.value=d.name;
+    edit_spec.value=d.specialization;
+    edit_phone.value=d.phone;
+    edit_email.value=d.email;
+}
+
+async function saveDoctor(){
+    let t=localStorage.getItem("token");
+    await fetch(API+"/doctors/"+edit_id.value,{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json",
+            "Authorization":"Bearer "+t
+        },
+        body:JSON.stringify({
+            name:edit_name.value,
+            specialization:edit_spec.value,
+            phone:edit_phone.value,
+            email:edit_email.value
+        })
+    });
+    show("doctors");
+    getDoctors();
+}
+
+function addDoctor(){
+    fetch(API+"/doctors/",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            name:d_name.value,
+            specialization:d_spec.value,
+            phone:d_phone.value,
+            email:d_email.value
+        })
+    }).then(()=>getDoctors());
+}
+
+async function deleteDoctor(id){
+    let t=localStorage.getItem("token");
+    await fetch(API+"/doctors/"+id,{
+        method:"DELETE",
+        headers:{"Authorization":"Bearer "+t}
+    });
+    getDoctors();
+}
+
+// PATIENTS
+async function getPatients(){
+    let r=await fetch(API+"/patients/");
+    let d=await r.json();
+    patientsList.innerHTML="";
+    d.forEach(p=>{
+        let li=document.createElement("li");
+        li.textContent=p.name;
+        patientsList.appendChild(li);
+    });
+}
+
+function addPatient(){
+    fetch(API+"/patients/",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            name:p_name.value,
+            age:+p_age.value,
+            gender:p_gender.value,
+            phone:p_phone.value
+        })
+    }).then(()=>getPatients());
+}
+
+// APPOINTMENTS
+async function getAppointments(){
+    let r=await fetch(API+"/appointments/");
+    let d=await r.json();
+    appointmentsList.innerHTML="";
+    d.forEach(a=>{
+        let li=document.createElement("li");
+        li.textContent="Appointment "+a.id;
+        appointmentsList.appendChild(li);
+    });
+}
+
+function addAppointment(){
+    fetch(API+"/appointments/",{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+            patient_id:+a_patient.value,
+            doctor_id:+a_doctor.value,
+            appointment_date:a_date.value
+        })
+    }).then(()=>getAppointments());
+}
+
+// MONITORING
+async function getStats(){
+    let r=await fetch(API+"/monitoring/stats");
+    monitorOutput.textContent=JSON.stringify(await r.json(),null,2);
+}
+
+async function getLogs(){
+    let r=await fetch(API+"/monitoring/logs");
+    monitorOutput.textContent=JSON.stringify(await r.json(),null,2);
+}
+</script>
+
+</body>
+</html>

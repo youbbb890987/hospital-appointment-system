@@ -5,17 +5,19 @@ from app.core.database import get_db
 from app.models.doctor import Doctor
 from app.schemas.doctor import DoctorCreate, DoctorResponse
 from app.cache.redis_cache import get_cache, set_cache, clear_cache
+from app.core.dependencies import require_admin
 
 router = APIRouter(prefix="/doctors", tags=["Doctors"])
 
 
 # =========================
-# CREATE DOCTOR
+# CREATE DOCTOR (ADMIN ONLY)
 # =========================
 @router.post("/", response_model=DoctorResponse)
 def create_doctor(
     doctor: DoctorCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user = Depends(require_admin)
 ):
     existing_doctor = db.query(Doctor).filter(
         Doctor.email == doctor.email
@@ -38,14 +40,13 @@ def create_doctor(
     db.commit()
     db.refresh(new_doctor)
 
-    # 🧹 clear cache
     clear_cache("all_doctors")
 
     return new_doctor
 
 
 # =========================
-# GET ALL DOCTORS (WITH CACHE)
+# GET ALL DOCTORS (OPEN)
 # =========================
 @router.get("/", response_model=list[DoctorResponse])
 def get_all_doctors(
@@ -75,7 +76,7 @@ def get_all_doctors(
 
 
 # =========================
-# GET DOCTOR BY ID
+# GET DOCTOR BY ID (OPEN)
 # =========================
 @router.get("/{doctor_id}", response_model=DoctorResponse)
 def get_doctor_by_id(
@@ -96,13 +97,14 @@ def get_doctor_by_id(
 
 
 # =========================
-# UPDATE DOCTOR
+# UPDATE DOCTOR (ADMIN ONLY)
 # =========================
 @router.put("/{doctor_id}", response_model=DoctorResponse)
 def update_doctor(
     doctor_id: int,
     doctor: DoctorCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user = Depends(require_admin)
 ):
     db_doctor = db.query(Doctor).filter(
         Doctor.id == doctor_id
@@ -122,19 +124,19 @@ def update_doctor(
     db.commit()
     db.refresh(db_doctor)
 
-    # 🧹 clear cache
     clear_cache("all_doctors")
 
     return db_doctor
 
 
 # =========================
-# DELETE DOCTOR
+# DELETE DOCTOR (ADMIN ONLY)
 # =========================
 @router.delete("/{doctor_id}")
 def delete_doctor(
     doctor_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user = Depends(require_admin)
 ):
     db_doctor = db.query(Doctor).filter(
         Doctor.id == doctor_id
@@ -149,7 +151,6 @@ def delete_doctor(
     db.delete(db_doctor)
     db.commit()
 
-    # 🧹 clear cache
     clear_cache("all_doctors")
 
     return {
