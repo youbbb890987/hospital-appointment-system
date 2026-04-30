@@ -1,10 +1,10 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 
 class DoctorCreate(BaseModel):
-    name: str
-    specialization: str
-    phone: str
+    name: str = Field(..., min_length=3, max_length=50)
+    specialization: str = Field(..., min_length=3, max_length=50)
+    phone: str = Field(..., min_length=10, max_length=15)
     email: EmailStr
 
 

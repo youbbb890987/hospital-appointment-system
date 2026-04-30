@@ -1,11 +1,11 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class PatientCreate(BaseModel):
-    name: str
-    age: int
-    gender: str
-    phone: str
+    name: str = Field(..., min_length=3, max_length=50)
+    age: int = Field(..., ge=0, le=120)
+    gender: str = Field(..., min_length=3, max_length=10)
+    phone: str = Field(..., min_length=10, max_length=15)
 
 
 class PatientResponse(BaseModel):

@@ -1,10 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class AppointmentCreate(BaseModel):
-    patient_id: int
-    doctor_id: int
-    appointment_date: str
+    patient_id: int = Field(..., gt=0)
+    doctor_id: int = Field(..., gt=0)
+    appointment_date: str = Field(..., min_length=5)
 
 
 class AppointmentResponse(BaseModel):
