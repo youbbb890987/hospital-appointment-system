@@ -9,6 +9,9 @@ from app.routes.appointments import router as appointments_router
 from app.routes.monitoring import router as monitoring_router
 from fastapi.middleware.cors import CORSMiddleware
 
+
+
+
 app = FastAPI(
     title="Hospital Appointment System",
     description="Backend project using FastAPI",
@@ -48,3 +51,4 @@ def get_profile(current_user=Depends(get_current_user)):
             "role": current_user.role
         }
     }
+

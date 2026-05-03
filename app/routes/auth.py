@@ -1,7 +1,6 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
-from app.core.logger import logger
 
 from app.core.database import get_db
 from app.models.user import User
@@ -12,9 +11,12 @@ from app.core.security import (
     create_access_token
 )
 
-router = APIRouter()
+router = APIRouter(prefix="/auth", tags=["Auth"])
 
 
+# =========================
+# REGISTER (USER ONLY)
+# =========================
 @router.post("/register", response_model=UserResponse)
 def register_user(
     user: UserRegister,
@@ -26,7 +28,7 @@ def register_user(
 
     if existing_user:
         raise HTTPException(
-            status_code=400,
+            status_code=status.HTTP_400_BAD_REQUEST,
             detail="Email already registered"
         )
 
@@ -34,17 +36,19 @@ def register_user(
         name=user.name,
         email=user.email,
         hashed_password=hash_password(user.password),
-        role=user.role
+        role=user.role  
     )
 
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    logger.info(f"New user registered: {new_user.email}")
 
     return new_user
 
 
+# =========================
+# LOGIN
+# =========================
 @router.post("/login")
 def login_user(
     form_data: OAuth2PasswordRequestForm = Depends(),
@@ -56,7 +60,7 @@ def login_user(
 
     if not db_user:
         raise HTTPException(
-            status_code=401,
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid email or password"
         )
 
@@ -65,7 +69,7 @@ def login_user(
         db_user.hashed_password
     ):
         raise HTTPException(
-            status_code=401,
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid email or password"
         )
 
@@ -75,8 +79,6 @@ def login_user(
             "role": db_user.role
         }
     )
-
-    logger.info(f"User logged in: {db_user.email}")
 
     return {
         "access_token": access_token,

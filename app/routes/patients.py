@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.models.patient import Patient
 from app.schemas.patient import PatientCreate, PatientResponse
+from app.core.dependencies import require_admin
 
 router = APIRouter(
     prefix="/patients",
@@ -11,10 +12,14 @@ router = APIRouter(
 )
 
 
+# =========================
+# CREATE PATIENT (ADMIN ONLY)
+# =========================
 @router.post("/", response_model=PatientResponse)
 def create_patient(
     patient: PatientCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user = Depends(require_admin)
 ):
     new_patient = Patient(
         name=patient.name,
@@ -30,17 +35,25 @@ def create_patient(
     return new_patient
 
 
+# =========================
+# GET ALL PATIENTS (OPTIONAL: OPEN)
+# =========================
 @router.get("/", response_model=list[PatientResponse])
 def get_all_patients(
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user = Depends(require_admin)
 ):
     return db.query(Patient).all()
 
 
+# =========================
+# GET PATIENT BY ID (OPTIONAL: OPEN)
+# =========================
 @router.get("/{patient_id}", response_model=PatientResponse)
 def get_patient_by_id(
     patient_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user = Depends(require_admin)
 ):
     patient = db.query(Patient).filter(
         Patient.id == patient_id
@@ -53,11 +66,17 @@ def get_patient_by_id(
         )
 
     return patient
+
+
+# =========================
+# UPDATE PATIENT (ADMIN ONLY)
+# =========================
 @router.put("/{patient_id}", response_model=PatientResponse)
 def update_patient(
     patient_id: int,
     patient: PatientCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user = Depends(require_admin)
 ):
     db_patient = db.query(Patient).filter(
         Patient.id == patient_id
@@ -80,10 +99,14 @@ def update_patient(
     return db_patient
 
 
+# =========================
+# DELETE PATIENT (ADMIN ONLY)
+# =========================
 @router.delete("/{patient_id}")
 def delete_patient(
     patient_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user = Depends(require_admin)
 ):
     db_patient = db.query(Patient).filter(
         Patient.id == patient_id

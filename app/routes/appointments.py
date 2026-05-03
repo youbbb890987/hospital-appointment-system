@@ -1,11 +1,12 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 from app.models.appointment import Appointment
-from app.models.patient import Patient
 from app.models.doctor import Doctor
 from app.schemas.appointment import AppointmentCreate, AppointmentResponse
+from app.core.dependencies import get_current_user, require_admin
+from app.models.user import User
 
 router = APIRouter(
     prefix="/appointments",
@@ -13,33 +14,37 @@ router = APIRouter(
 )
 
 
+# =========================
+# CREATE APPOINTMENT (USER)
+# =========================
 @router.post("/", response_model=AppointmentResponse)
 def create_appointment(
     appointment: AppointmentCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
-    patient = db.query(Patient).filter(
-        Patient.id == appointment.patient_id
-    ).first()
-
-    if not patient:
-        raise HTTPException(
-            status_code=404,
-            detail="Patient not found"
-        )
-
+    # check doctor exists
     doctor = db.query(Doctor).filter(
         Doctor.id == appointment.doctor_id
     ).first()
 
     if not doctor:
+        raise HTTPException(status_code=404, detail="Doctor not found")
+
+    # ❗ منع تضارب لنفس الدكتور في نفس الوقت
+    conflict = db.query(Appointment).filter(
+        Appointment.doctor_id == appointment.doctor_id,
+        Appointment.appointment_date == appointment.appointment_date
+    ).first()
+
+    if conflict:
         raise HTTPException(
-            status_code=404,
-            detail="Doctor not found"
+            status_code=400,
+            detail="This time slot is already booked"
         )
 
     new_appointment = Appointment(
-        patient_id=appointment.patient_id,
+        user_id=current_user.id,
         doctor_id=appointment.doctor_id,
         appointment_date=appointment.appointment_date,
         status="Pending"
@@ -52,46 +57,56 @@ def create_appointment(
     return new_appointment
 
 
-@router.get("/", response_model=list[AppointmentResponse])
-def get_all_appointments(
-    db: Session = Depends(get_db)
+# =========================
+# GET MY APPOINTMENTS (USER)
+# =========================
+@router.get("/my", response_model=list[AppointmentResponse])
+def get_my_appointments(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
-    return db.query(Appointment).all()
+    return db.query(Appointment).filter(
+        Appointment.user_id == current_user.id
+    ).all()
 
 
-@router.get("/{appointment_id}", response_model=AppointmentResponse)
-def get_appointment_by_id(
-    appointment_id: int,
-    db: Session = Depends(get_db)
-):
-    appointment = db.query(Appointment).filter(
-        Appointment.id == appointment_id
-    ).first()
-
-    if not appointment:
-        raise HTTPException(
-            status_code=404,
-            detail="Appointment not found"
-        )
-
-    return appointment
+# =========================
+# UPDATE MY APPOINTMENT (USER)
+# =========================
 @router.put("/{appointment_id}", response_model=AppointmentResponse)
 def update_appointment(
     appointment_id: int,
     appointment: AppointmentCreate,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
     db_appointment = db.query(Appointment).filter(
         Appointment.id == appointment_id
     ).first()
 
     if not db_appointment:
+        raise HTTPException(status_code=404, detail="Appointment not found")
+
+    # ❗ user يعدل بس بتاعه
+    if db_appointment.user_id != current_user.id:
         raise HTTPException(
-            status_code=404,
-            detail="Appointment not found"
+            status_code=403,
+            detail="Not allowed"
         )
 
-    db_appointment.patient_id = appointment.patient_id
+    # ❗ check conflict
+    conflict = db.query(Appointment).filter(
+        Appointment.doctor_id == appointment.doctor_id,
+        Appointment.appointment_date == appointment.appointment_date,
+        Appointment.id != appointment_id
+    ).first()
+
+    if conflict:
+        raise HTTPException(
+            status_code=400,
+            detail="Time slot already booked"
+        )
+
     db_appointment.doctor_id = appointment.doctor_id
     db_appointment.appointment_date = appointment.appointment_date
 
@@ -101,24 +116,62 @@ def update_appointment(
     return db_appointment
 
 
+# =========================
+# DELETE MY APPOINTMENT (USER)
+# =========================
 @router.delete("/{appointment_id}")
 def delete_appointment(
     appointment_id: int,
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
-    db_appointment = db.query(Appointment).filter(
+    appointment = db.query(Appointment).filter(
         Appointment.id == appointment_id
     ).first()
 
-    if not db_appointment:
+    if not appointment:
+        raise HTTPException(status_code=404, detail="Appointment not found")
+
+    if appointment.user_id != current_user.id:
         raise HTTPException(
-            status_code=404,
-            detail="Appointment not found"
+            status_code=403,
+            detail="Not allowed"
         )
 
-    db.delete(db_appointment)
+    db.delete(appointment)
     db.commit()
 
-    return {
-        "message": "Appointment deleted successfully"
-    }
+    return {"message": "Appointment deleted"}
+
+
+# =========================
+# ADMIN: GET ALL APPOINTMENTS
+# =========================
+@router.get("/", response_model=list[AppointmentResponse])
+def get_all_appointments(
+    db: Session = Depends(get_db),
+    current_user = Depends(require_admin)
+):
+    return db.query(Appointment).all()
+
+
+# =========================
+# ADMIN: DELETE ANY APPOINTMENT
+# =========================
+@router.delete("/admin/{appointment_id}")
+def admin_delete_appointment(
+    appointment_id: int,
+    db: Session = Depends(get_db),
+    current_user = Depends(require_admin)
+):
+    appointment = db.query(Appointment).filter(
+        Appointment.id == appointment_id
+    ).first()
+
+    if not appointment:
+        raise HTTPException(status_code=404, detail="Appointment not found")
+
+    db.delete(appointment)
+    db.commit()
+
+    return {"message": "Deleted by admin"}

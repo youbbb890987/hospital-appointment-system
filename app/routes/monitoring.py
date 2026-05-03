@@ -1,11 +1,20 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 import os
 
-router = APIRouter(prefix="/monitoring", tags=["Monitoring"])
+from app.core.dependencies import require_admin
+
+router = APIRouter(
+    prefix="/monitoring",
+    tags=["Monitoring"],
+    dependencies=[Depends(require_admin)]  # 🔥 يحمي كل endpoints
+)
 
 REQUEST_COUNT = 0
 
 
+# =========================
+# STATS (ADMIN ONLY)
+# =========================
 @router.get("/stats")
 def get_stats():
     global REQUEST_COUNT
@@ -18,6 +27,9 @@ def get_stats():
     }
 
 
+# =========================
+# LOGS (ADMIN ONLY)
+# =========================
 @router.get("/logs")
 def get_logs():
     if not os.path.exists("app.log"):
