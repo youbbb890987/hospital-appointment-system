@@ -23,3 +23,601 @@
 2026-05-01 13:16:46,092 - INFO - User logged in: philopater@gmail.com
 2026-05-01 13:18:08,087 - INFO - User logged in: philopater@gmail.com
 2026-05-01 15:22:14,610 - INFO - User logged in: philopaterfarag@gmail.com
+2026-05-07 21:41:05 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:05 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:05 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 205.79ms
+2026-05-07 21:41:05 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:05 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:05 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 190.12ms
+2026-05-07 21:41:05 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:05 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:05 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 203.41ms
+2026-05-07 21:41:05 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:05 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:05 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 202.68ms
+2026-05-07 21:41:05 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:05 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 9.71ms
+2026-05-07 21:41:05 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:05 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 9.02ms
+2026-05-07 21:41:05 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:06 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:06 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 199.06ms
+2026-05-07 21:41:06 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:06 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:06 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 190.77ms
+2026-05-07 21:41:06 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:06 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 7.04ms
+2026-05-07 21:41:06 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:06 | WARNING | hospital_system | RESPONSE | POST /appointments/ | Status: 401 | Time: 1.0ms
+2026-05-07 21:41:06 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:06 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:06 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 195.04ms
+2026-05-07 21:41:06 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:06 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:06 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 189.92ms
+2026-05-07 21:41:06 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:06 | WARNING | hospital_system | RESPONSE | POST /appointments/ | Status: 404 | Time: 3.32ms
+2026-05-07 21:41:06 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:07 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:07 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 195.99ms
+2026-05-07 21:41:07 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:07 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:07 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 191.91ms
+2026-05-07 21:41:07 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:07 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:07 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 191.77ms
+2026-05-07 21:41:07 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:07 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:07 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 189.51ms
+2026-05-07 21:41:07 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:07 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 6.23ms
+2026-05-07 21:41:07 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:07 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 5.05ms
+2026-05-07 21:41:07 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:07 | WARNING | hospital_system | RESPONSE | POST /appointments/ | Status: 400 | Time: 2.5ms
+2026-05-07 21:41:07 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:07 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:07 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 196.36ms
+2026-05-07 21:41:07 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:08 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:08 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 192.82ms
+2026-05-07 21:41:08 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:08 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:08 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 195.13ms
+2026-05-07 21:41:08 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:08 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:08 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 189.59ms
+2026-05-07 21:41:08 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:08 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 31.89ms
+2026-05-07 21:41:08 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:08 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 5.95ms
+2026-05-07 21:41:08 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:08 | WARNING | hospital_system | RESPONSE | POST /appointments/ | Status: 400 | Time: 2.64ms
+2026-05-07 21:41:08 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:08 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:08 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 197.72ms
+2026-05-07 21:41:08 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:08 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:08 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 191.34ms
+2026-05-07 21:41:08 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:09 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:09 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 194.14ms
+2026-05-07 21:41:09 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:09 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:09 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 200.88ms
+2026-05-07 21:41:09 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:09 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 7.31ms
+2026-05-07 21:41:09 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:09 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 5.0ms
+2026-05-07 21:41:09 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:09 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 4.23ms
+2026-05-07 21:41:09 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:09 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:09 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 195.65ms
+2026-05-07 21:41:09 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:09 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:09 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 194.43ms
+2026-05-07 21:41:09 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:09 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:09 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 225.5ms
+2026-05-07 21:41:09 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:10 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:10 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 221.79ms
+2026-05-07 21:41:10 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:10 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 15.67ms
+2026-05-07 21:41:10 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:10 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 10.2ms
+2026-05-07 21:41:10 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:10 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 12.78ms
+2026-05-07 21:41:10 | INFO | hospital_system | REQUEST | GET /appointments/my | Client: testclient
+2026-05-07 21:41:10 | INFO | hospital_system | RESPONSE | GET /appointments/my | Status: 200 | Time: 2.01ms
+2026-05-07 21:41:10 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:10 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:10 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 239.89ms
+2026-05-07 21:41:10 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:10 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:10 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 214.77ms
+2026-05-07 21:41:10 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:10 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:10 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 211.27ms
+2026-05-07 21:41:10 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:11 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:11 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 219.57ms
+2026-05-07 21:41:11 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:11 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 8.07ms
+2026-05-07 21:41:11 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:11 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 8.62ms
+2026-05-07 21:41:11 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:11 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 9.25ms
+2026-05-07 21:41:11 | INFO | hospital_system | REQUEST | GET /appointments/ | Client: testclient
+2026-05-07 21:41:11 | INFO | hospital_system | RESPONSE | GET /appointments/ | Status: 200 | Time: 5.01ms
+2026-05-07 21:41:11 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:11 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:11 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 205.9ms
+2026-05-07 21:41:11 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:11 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:11 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 238.3ms
+2026-05-07 21:41:11 | INFO | hospital_system | REQUEST | GET /appointments/ | Client: testclient
+2026-05-07 21:41:11 | WARNING | hospital_system | RESPONSE | GET /appointments/ | Status: 403 | Time: 1.65ms
+2026-05-07 21:41:11 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:12 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:12 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 255.75ms
+2026-05-07 21:41:12 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:12 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:12 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 226.21ms
+2026-05-07 21:41:12 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:12 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:12 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 217.52ms
+2026-05-07 21:41:12 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:12 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:12 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 221.32ms
+2026-05-07 21:41:12 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:12 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 8.24ms
+2026-05-07 21:41:12 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:12 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 6.53ms
+2026-05-07 21:41:12 | INFO | hospital_system | REQUEST | GET /appointments/1 | Client: testclient
+2026-05-07 21:41:12 | INFO | hospital_system | RESPONSE | GET /appointments/1 | Status: 200 | Time: 2.66ms
+2026-05-07 21:41:12 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:12 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:12 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 222.81ms
+2026-05-07 21:41:12 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:13 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:13 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 208.26ms
+2026-05-07 21:41:13 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:13 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:13 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 244.2ms
+2026-05-07 21:41:13 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:13 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:13 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 275.14ms
+2026-05-07 21:41:13 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:13 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 19.75ms
+2026-05-07 21:41:13 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:13 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 12.72ms
+2026-05-07 21:41:13 | INFO | hospital_system | REQUEST | GET /appointments/1 | Client: testclient
+2026-05-07 21:41:13 | WARNING | hospital_system | RESPONSE | GET /appointments/1 | Status: 403 | Time: 3.65ms
+2026-05-07 21:41:13 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:14 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:14 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 268.86ms
+2026-05-07 21:41:14 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:14 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:14 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 203.9ms
+2026-05-07 21:41:14 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:14 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:14 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 258.27ms
+2026-05-07 21:41:14 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:14 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:14 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 216.08ms
+2026-05-07 21:41:14 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:14 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 16.89ms
+2026-05-07 21:41:14 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:14 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 25.87ms
+2026-05-07 21:41:14 | INFO | hospital_system | REQUEST | PUT /appointments/1 | Client: testclient
+2026-05-07 21:41:14 | INFO | hospital_system | RESPONSE | PUT /appointments/1 | Status: 200 | Time: 34.97ms
+2026-05-07 21:41:14 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:15 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:15 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 218.54ms
+2026-05-07 21:41:15 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:15 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:15 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 234.46ms
+2026-05-07 21:41:15 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:15 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:15 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 227.9ms
+2026-05-07 21:41:15 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:15 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:15 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 235.47ms
+2026-05-07 21:41:15 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:15 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 8.0ms
+2026-05-07 21:41:15 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:15 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 11.11ms
+2026-05-07 21:41:15 | INFO | hospital_system | REQUEST | PUT /appointments/1 | Client: testclient
+2026-05-07 21:41:15 | WARNING | hospital_system | RESPONSE | PUT /appointments/1 | Status: 403 | Time: 2.03ms
+2026-05-07 21:41:15 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:16 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:16 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 229.46ms
+2026-05-07 21:41:16 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:16 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:16 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 219.33ms
+2026-05-07 21:41:16 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:16 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:16 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 249.99ms
+2026-05-07 21:41:16 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:16 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:16 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 255.05ms
+2026-05-07 21:41:16 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:16 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 8.09ms
+2026-05-07 21:41:16 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:16 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 9.64ms
+2026-05-07 21:41:16 | INFO | hospital_system | REQUEST | DELETE /appointments/1 | Client: testclient
+2026-05-07 21:41:16 | INFO | hospital_system | RESPONSE | DELETE /appointments/1 | Status: 200 | Time: 8.06ms
+2026-05-07 21:41:16 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:17 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:17 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 258.23ms
+2026-05-07 21:41:17 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:17 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:17 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 217.69ms
+2026-05-07 21:41:17 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:17 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:17 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 255.47ms
+2026-05-07 21:41:17 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:17 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:17 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 260.44ms
+2026-05-07 21:41:17 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:17 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 9.57ms
+2026-05-07 21:41:17 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:17 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 11.66ms
+2026-05-07 21:41:17 | INFO | hospital_system | REQUEST | DELETE /appointments/1 | Client: testclient
+2026-05-07 21:41:17 | INFO | hospital_system | RESPONSE | DELETE /appointments/1 | Status: 200 | Time: 9.19ms
+2026-05-07 21:41:17 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:18 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:18 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 242.0ms
+2026-05-07 21:41:18 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:18 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:18 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 224.67ms
+2026-05-07 21:41:18 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:18 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:18 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 253.97ms
+2026-05-07 21:41:18 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:18 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:18 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 249.83ms
+2026-05-07 21:41:18 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:18 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 12.39ms
+2026-05-07 21:41:18 | INFO | hospital_system | REQUEST | POST /appointments/ | Client: testclient
+2026-05-07 21:41:18 | INFO | hospital_system | RESPONSE | POST /appointments/ | Status: 200 | Time: 0.0ms
+2026-05-07 21:41:18 | INFO | hospital_system | REQUEST | DELETE /appointments/1 | Client: testclient
+2026-05-07 21:41:18 | WARNING | hospital_system | RESPONSE | DELETE /appointments/1 | Status: 403 | Time: 10.06ms
+2026-05-07 21:41:19 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:19 | INFO | hospital_system | REGISTER SUCCESS | Email: john@test.com | Role: UserRole.patient
+2026-05-07 21:41:19 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 253.31ms
+2026-05-07 21:41:19 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:19 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:19 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 235.01ms
+2026-05-07 21:41:19 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:19 | INFO | hospital_system | REGISTER SUCCESS | Email: john@test.com | Role: UserRole.patient
+2026-05-07 21:41:19 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 213.54ms
+2026-05-07 21:41:19 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:19 | WARNING | hospital_system | REGISTER FAILED | Email already exists: john@test.com
+2026-05-07 21:41:19 | WARNING | hospital_system | RESPONSE | POST /auth/register | Status: 400 | Time: 6.59ms
+2026-05-07 21:41:19 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:19 | WARNING | hospital_system | RESPONSE | POST /auth/register | Status: 422 | Time: 0.0ms
+2026-05-07 21:41:19 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:20 | INFO | hospital_system | REGISTER SUCCESS | Email: john@test.com | Role: UserRole.patient
+2026-05-07 21:41:20 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 231.95ms
+2026-05-07 21:41:20 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:20 | INFO | hospital_system | LOGIN SUCCESS | Email: john@test.com | Role: patient
+2026-05-07 21:41:20 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 234.71ms
+2026-05-07 21:41:20 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:20 | INFO | hospital_system | REGISTER SUCCESS | Email: john@test.com | Role: UserRole.patient
+2026-05-07 21:41:20 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 204.68ms
+2026-05-07 21:41:20 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:20 | WARNING | hospital_system | LOGIN FAILED | Wrong password for: john@test.com
+2026-05-07 21:41:20 | WARNING | hospital_system | RESPONSE | POST /auth/login | Status: 401 | Time: 235.62ms
+2026-05-07 21:41:20 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:20 | WARNING | hospital_system | LOGIN FAILED | Email not found: notexist@test.com
+2026-05-07 21:41:20 | WARNING | hospital_system | RESPONSE | POST /auth/login | Status: 401 | Time: 1.84ms
+2026-05-07 21:41:20 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:21 | INFO | hospital_system | REGISTER SUCCESS | Email: john@test.com | Role: UserRole.patient
+2026-05-07 21:41:21 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 206.27ms
+2026-05-07 21:41:21 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:21 | INFO | hospital_system | LOGIN SUCCESS | Email: john@test.com | Role: patient
+2026-05-07 21:41:21 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 230.58ms
+2026-05-07 21:41:21 | INFO | hospital_system | REQUEST | GET /profile | Client: testclient
+2026-05-07 21:41:21 | INFO | hospital_system | Profile accessed by user: john@test.com | Role: patient
+2026-05-07 21:41:21 | INFO | hospital_system | RESPONSE | GET /profile | Status: 200 | Time: 4.71ms
+2026-05-07 21:41:21 | INFO | hospital_system | REQUEST | GET /profile | Client: testclient
+2026-05-07 21:41:21 | WARNING | hospital_system | RESPONSE | GET /profile | Status: 401 | Time: 0.0ms
+2026-05-07 21:41:21 | INFO | hospital_system | REQUEST | GET /profile | Client: testclient
+2026-05-07 21:41:21 | WARNING | hospital_system | RESPONSE | GET /profile | Status: 401 | Time: 0.0ms
+2026-05-07 21:41:21 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:21 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:21 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 272.84ms
+2026-05-07 21:41:21 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:22 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:22 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 243.19ms
+2026-05-07 21:41:22 | INFO | hospital_system | REQUEST | GET /patients/ | Client: testclient
+2026-05-07 21:41:22 | WARNING | hospital_system | RESPONSE | GET /patients/ | Status: 403 | Time: 12.43ms
+2026-05-07 21:41:22 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:22 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:22 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 209.76ms
+2026-05-07 21:41:22 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:22 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:22 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 251.83ms
+2026-05-07 21:41:22 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:22 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 8.34ms
+2026-05-07 21:41:22 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:22 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:22 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 249.71ms
+2026-05-07 21:41:22 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:23 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:23 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 210.4ms
+2026-05-07 21:41:23 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:23 | WARNING | hospital_system | RESPONSE | POST /doctors/ | Status: 403 | Time: 3.04ms
+2026-05-07 21:41:23 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:23 | WARNING | hospital_system | RESPONSE | POST /doctors/ | Status: 401 | Time: 0.0ms
+2026-05-07 21:41:23 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:23 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:23 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 194.08ms
+2026-05-07 21:41:23 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:23 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:23 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 221.12ms
+2026-05-07 21:41:23 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:23 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 12.24ms
+2026-05-07 21:41:23 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:23 | WARNING | hospital_system | RESPONSE | POST /doctors/ | Status: 400 | Time: 4.77ms
+2026-05-07 21:41:23 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:23 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:23 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 262.29ms
+2026-05-07 21:41:23 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:24 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:24 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 255.16ms
+2026-05-07 21:41:24 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:24 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 11.52ms
+2026-05-07 21:41:24 | INFO | hospital_system | REQUEST | GET /doctors/ | Client: testclient
+2026-05-07 21:41:24 | INFO | hospital_system | RESPONSE | GET /doctors/ | Status: 200 | Time: 6.34ms
+2026-05-07 21:41:24 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:24 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:24 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 224.34ms
+2026-05-07 21:41:24 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:24 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:24 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 275.12ms
+2026-05-07 21:41:24 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:24 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 7.45ms
+2026-05-07 21:41:24 | INFO | hospital_system | REQUEST | GET /doctors/1 | Client: testclient
+2026-05-07 21:41:24 | INFO | hospital_system | RESPONSE | GET /doctors/1 | Status: 200 | Time: 0.0ms
+2026-05-07 21:41:24 | INFO | hospital_system | REQUEST | GET /doctors/9999 | Client: testclient
+2026-05-07 21:41:24 | WARNING | hospital_system | RESPONSE | GET /doctors/9999 | Status: 404 | Time: 0.0ms
+2026-05-07 21:41:24 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:25 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:25 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 226.99ms
+2026-05-07 21:41:25 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:25 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:25 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 244.58ms
+2026-05-07 21:41:25 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:25 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 20.16ms
+2026-05-07 21:41:25 | INFO | hospital_system | REQUEST | PUT /doctors/1 | Client: testclient
+2026-05-07 21:41:25 | INFO | hospital_system | RESPONSE | PUT /doctors/1 | Status: 200 | Time: 10.24ms
+2026-05-07 21:41:25 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:25 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:25 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 270.1ms
+2026-05-07 21:41:25 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:25 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:25 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 214.43ms
+2026-05-07 21:41:25 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:26 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:26 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 231.93ms
+2026-05-07 21:41:26 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:26 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:26 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 316.06ms
+2026-05-07 21:41:26 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:26 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 11.7ms
+2026-05-07 21:41:26 | INFO | hospital_system | REQUEST | PUT /doctors/1 | Client: testclient
+2026-05-07 21:41:26 | WARNING | hospital_system | RESPONSE | PUT /doctors/1 | Status: 403 | Time: 6.26ms
+2026-05-07 21:41:26 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:26 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:26 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 262.64ms
+2026-05-07 21:41:26 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:26 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:26 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 244.88ms
+2026-05-07 21:41:26 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:26 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 10.54ms
+2026-05-07 21:41:26 | INFO | hospital_system | REQUEST | DELETE /doctors/1 | Client: testclient
+2026-05-07 21:41:26 | INFO | hospital_system | RESPONSE | DELETE /doctors/1 | Status: 200 | Time: 10.37ms
+2026-05-07 21:41:26 | INFO | hospital_system | REQUEST | GET /doctors/1 | Client: testclient
+2026-05-07 21:41:26 | WARNING | hospital_system | RESPONSE | GET /doctors/1 | Status: 404 | Time: 9.88ms
+2026-05-07 21:41:27 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:27 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:27 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 231.51ms
+2026-05-07 21:41:27 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:27 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:27 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 236.19ms
+2026-05-07 21:41:27 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:27 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:27 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 249.29ms
+2026-05-07 21:41:27 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:28 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:28 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 256.17ms
+2026-05-07 21:41:28 | INFO | hospital_system | REQUEST | POST /doctors/ | Client: testclient
+2026-05-07 21:41:28 | INFO | hospital_system | RESPONSE | POST /doctors/ | Status: 200 | Time: 15.37ms
+2026-05-07 21:41:28 | INFO | hospital_system | REQUEST | DELETE /doctors/1 | Client: testclient
+2026-05-07 21:41:28 | WARNING | hospital_system | RESPONSE | DELETE /doctors/1 | Status: 403 | Time: 2.09ms
+2026-05-07 21:41:28 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:28 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:28 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 266.7ms
+2026-05-07 21:41:28 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:28 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:28 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 281.64ms
+2026-05-07 21:41:28 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:28 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 15.6ms
+2026-05-07 21:41:28 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:28 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:28 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 239.82ms
+2026-05-07 21:41:28 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:29 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:29 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 264.97ms
+2026-05-07 21:41:29 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:29 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 8.66ms
+2026-05-07 21:41:29 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:29 | WARNING | hospital_system | RESPONSE | POST /patients/ | Status: 401 | Time: 0.0ms
+2026-05-07 21:41:29 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:29 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:29 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 242.84ms
+2026-05-07 21:41:29 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:29 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:29 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 260.9ms
+2026-05-07 21:41:29 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:29 | WARNING | hospital_system | RESPONSE | POST /patients/ | Status: 422 | Time: 5.22ms
+2026-05-07 21:41:29 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:30 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:30 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 200.71ms
+2026-05-07 21:41:30 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:30 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:30 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 266.81ms
+2026-05-07 21:41:30 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:30 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:30 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 287.63ms
+2026-05-07 21:41:30 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:30 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:30 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 250.21ms
+2026-05-07 21:41:30 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:30 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 14.54ms
+2026-05-07 21:41:30 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:30 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 4.79ms
+2026-05-07 21:41:30 | INFO | hospital_system | REQUEST | GET /patients/ | Client: testclient
+2026-05-07 21:41:30 | INFO | hospital_system | RESPONSE | GET /patients/ | Status: 200 | Time: 0.0ms
+2026-05-07 21:41:30 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:31 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:31 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 283.77ms
+2026-05-07 21:41:31 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:31 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:31 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 249.8ms
+2026-05-07 21:41:31 | INFO | hospital_system | REQUEST | GET /patients/ | Client: testclient
+2026-05-07 21:41:31 | WARNING | hospital_system | RESPONSE | GET /patients/ | Status: 403 | Time: 4.65ms
+2026-05-07 21:41:31 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:31 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:31 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 274.06ms
+2026-05-07 21:41:31 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:32 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:32 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 284.79ms
+2026-05-07 21:41:32 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:32 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:32 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 222.73ms
+2026-05-07 21:41:32 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:32 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:32 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 229.64ms
+2026-05-07 21:41:32 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:32 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 15.6ms
+2026-05-07 21:41:32 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:32 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 12.44ms
+2026-05-07 21:41:32 | INFO | hospital_system | REQUEST | GET /patients/my | Client: testclient
+2026-05-07 21:41:32 | INFO | hospital_system | RESPONSE | GET /patients/my | Status: 200 | Time: 4.07ms
+2026-05-07 21:41:32 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:32 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:32 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 219.81ms
+2026-05-07 21:41:32 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:33 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:33 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 217.46ms
+2026-05-07 21:41:33 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:33 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 5.91ms
+2026-05-07 21:41:33 | INFO | hospital_system | REQUEST | GET /patients/1 | Client: testclient
+2026-05-07 21:41:33 | INFO | hospital_system | RESPONSE | GET /patients/1 | Status: 200 | Time: 9.53ms
+2026-05-07 21:41:33 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:33 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:33 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 213.46ms
+2026-05-07 21:41:33 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:33 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:33 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 247.8ms
+2026-05-07 21:41:33 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:33 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 19.86ms
+2026-05-07 21:41:33 | INFO | hospital_system | REQUEST | GET /patients/1 | Client: testclient
+2026-05-07 21:41:33 | INFO | hospital_system | RESPONSE | GET /patients/1 | Status: 200 | Time: 7.27ms
+2026-05-07 21:41:33 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:33 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:33 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 245.19ms
+2026-05-07 21:41:33 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:34 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:34 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 227.47ms
+2026-05-07 21:41:34 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:34 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:34 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 260.77ms
+2026-05-07 21:41:34 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:34 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:34 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 312.19ms
+2026-05-07 21:41:34 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:34 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 21.88ms
+2026-05-07 21:41:34 | INFO | hospital_system | REQUEST | GET /patients/1 | Client: testclient
+2026-05-07 21:41:34 | WARNING | hospital_system | RESPONSE | GET /patients/1 | Status: 403 | Time: 1.33ms
+2026-05-07 21:41:34 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:35 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:35 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 240.79ms
+2026-05-07 21:41:35 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:35 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:35 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 228.94ms
+2026-05-07 21:41:35 | INFO | hospital_system | REQUEST | GET /patients/9999 | Client: testclient
+2026-05-07 21:41:35 | WARNING | hospital_system | RESPONSE | GET /patients/9999 | Status: 404 | Time: 2.12ms
+2026-05-07 21:41:35 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:35 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:35 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 216.21ms
+2026-05-07 21:41:35 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:35 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:35 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 217.44ms
+2026-05-07 21:41:35 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:35 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 8.07ms
+2026-05-07 21:41:35 | INFO | hospital_system | REQUEST | PUT /patients/1 | Client: testclient
+2026-05-07 21:41:35 | INFO | hospital_system | RESPONSE | PUT /patients/1 | Status: 200 | Time: 7.21ms
+2026-05-07 21:41:35 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:36 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:36 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 208.52ms
+2026-05-07 21:41:36 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:36 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:36 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 219.65ms
+2026-05-07 21:41:36 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:36 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:36 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 239.83ms
+2026-05-07 21:41:36 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:36 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:36 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 210.85ms
+2026-05-07 21:41:36 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:36 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 14.14ms
+2026-05-07 21:41:36 | INFO | hospital_system | REQUEST | PUT /patients/1 | Client: testclient
+2026-05-07 21:41:36 | WARNING | hospital_system | RESPONSE | PUT /patients/1 | Status: 403 | Time: 2.25ms
+2026-05-07 21:41:36 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:36 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:36 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 233.81ms
+2026-05-07 21:41:36 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:37 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:37 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 219.15ms
+2026-05-07 21:41:37 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:37 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 7.78ms
+2026-05-07 21:41:37 | INFO | hospital_system | REQUEST | DELETE /patients/1 | Client: testclient
+2026-05-07 21:41:37 | INFO | hospital_system | RESPONSE | DELETE /patients/1 | Status: 200 | Time: 5.67ms
+2026-05-07 21:41:37 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:37 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:37 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 283.64ms
+2026-05-07 21:41:37 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:37 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:37 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 254.32ms
+2026-05-07 21:41:37 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:38 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:38 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 212.54ms
+2026-05-07 21:41:38 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:38 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:38 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 237.43ms
+2026-05-07 21:41:38 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:38 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 12.2ms
+2026-05-07 21:41:38 | INFO | hospital_system | REQUEST | DELETE /patients/1 | Client: testclient
+2026-05-07 21:41:38 | INFO | hospital_system | RESPONSE | DELETE /patients/1 | Status: 200 | Time: 8.02ms
+2026-05-07 21:41:38 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:38 | INFO | hospital_system | REGISTER SUCCESS | Email: user@test.com | Role: UserRole.patient
+2026-05-07 21:41:38 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 208.78ms
+2026-05-07 21:41:38 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:38 | INFO | hospital_system | LOGIN SUCCESS | Email: user@test.com | Role: patient
+2026-05-07 21:41:38 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 222.55ms
+2026-05-07 21:41:38 | INFO | hospital_system | REQUEST | POST /auth/register | Client: testclient
+2026-05-07 21:41:39 | INFO | hospital_system | REGISTER SUCCESS | Email: admin@test.com | Role: UserRole.admin
+2026-05-07 21:41:39 | INFO | hospital_system | RESPONSE | POST /auth/register | Status: 200 | Time: 268.04ms
+2026-05-07 21:41:39 | INFO | hospital_system | REQUEST | POST /auth/login | Client: testclient
+2026-05-07 21:41:39 | INFO | hospital_system | LOGIN SUCCESS | Email: admin@test.com | Role: admin
+2026-05-07 21:41:39 | INFO | hospital_system | RESPONSE | POST /auth/login | Status: 200 | Time: 217.13ms
+2026-05-07 21:41:39 | INFO | hospital_system | REQUEST | POST /patients/ | Client: testclient
+2026-05-07 21:41:39 | INFO | hospital_system | RESPONSE | POST /patients/ | Status: 200 | Time: 15.34ms
+2026-05-07 21:41:39 | INFO | hospital_system | REQUEST | DELETE /patients/1 | Client: testclient
+2026-05-07 21:41:39 | WARNING | hospital_system | RESPONSE | DELETE /patients/1 | Status: 403 | Time: 2.01ms

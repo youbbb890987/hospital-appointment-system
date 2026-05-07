@@ -73,6 +73,49 @@ def get_my_appointments(db: Session = Depends(get_db), current_user: User = Depe
     return appointments
 
 
+# =========================
+# GET APPOINTMENTS BY DOCTOR (ADMIN OR DOCTOR)
+# =========================
+@router.get("/doctor/{doctor_id}", response_model=list[AppointmentResponse])
+def get_appointments_by_doctor(
+    doctor_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    if current_user.role not in ["admin", "doctor"]:
+        raise HTTPException(status_code=403, detail="Admin or Doctor access required")
+
+    doctor = db.query(Doctor).filter(Doctor.id == doctor_id).first()
+    if not doctor:
+        raise HTTPException(status_code=404, detail="Doctor not found")
+
+    cache_key = f"doctor_appointments_{doctor_id}"
+    cached = get_cache(cache_key)
+    if cached:
+        return cached
+
+    appointments = db.query(Appointment).filter(Appointment.doctor_id == doctor_id).all()
+    result = [{"id": a.id, "user_id": a.user_id, "doctor_id": a.doctor_id, "appointment_date": a.appointment_date, "status": a.status} for a in appointments]
+    set_cache(cache_key, result)
+    return appointments
+
+
+# =========================
+# GET APPOINTMENTS BY PATIENT/USER (ADMIN OR OWNER)
+# =========================
+@router.get("/patient/{user_id}", response_model=list[AppointmentResponse])
+def get_appointments_by_patient(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    if current_user.role != "admin" and current_user.id != user_id:
+        raise HTTPException(status_code=403, detail="Not allowed")
+
+    appointments = db.query(Appointment).filter(Appointment.user_id == user_id).all()
+    return appointments
+
+
 @router.get("/", response_model=list[AppointmentResponse])
 def get_all_appointments(db: Session = Depends(get_db), current_user: User = Depends(require_admin)):
     cached = get_cache("all_appointments")
@@ -114,11 +157,14 @@ def update_appointment(appointment_id: int, appointment: AppointmentCreate, db: 
     clear_cache("all_appointments")
     clear_cache(f"appointment_{appointment_id}")
     clear_cache(f"my_appointments_{current_user.id}")
+    clear_cache(f"doctor_appointments_{db_appointment.doctor_id}")
     return db_appointment
 
 
 @router.patch("/{appointment_id}/status", response_model=AppointmentResponse)
-def update_appointment_status(appointment_id: int, status_update: AppointmentStatusUpdate, db: Session = Depends(get_db), current_user: User = Depends(require_admin)):
+def update_appointment_status(appointment_id: int, status_update: AppointmentStatusUpdate, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    if current_user.role not in ["admin", "doctor"]:
+        raise HTTPException(status_code=403, detail="Admin or Doctor access required")
     appointment = db.query(Appointment).filter(Appointment.id == appointment_id).first()
     if not appointment:
         raise HTTPException(status_code=404, detail="Appointment not found")
@@ -130,6 +176,7 @@ def update_appointment_status(appointment_id: int, status_update: AppointmentSta
     clear_cache("all_appointments")
     clear_cache(f"appointment_{appointment_id}")
     clear_cache(f"my_appointments_{appointment.user_id}")
+    clear_cache(f"doctor_appointments_{appointment.doctor_id}")
     return appointment
 
 
@@ -141,9 +188,11 @@ def delete_appointment(appointment_id: int, db: Session = Depends(get_db), curre
     if current_user.role != "admin" and appointment.user_id != current_user.id:
         raise HTTPException(status_code=403, detail="Not allowed")
     user_id = appointment.user_id
+    doctor_id = appointment.doctor_id
     db.delete(appointment)
     db.commit()
     clear_cache("all_appointments")
     clear_cache(f"appointment_{appointment_id}")
     clear_cache(f"my_appointments_{user_id}")
+    clear_cache(f"doctor_appointments_{doctor_id}")
     return {"message": "Appointment deleted"}
