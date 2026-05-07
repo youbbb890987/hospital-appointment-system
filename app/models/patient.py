@@ -10,3 +10,5 @@ class Patient(Base):
     age = Column(Integer, nullable=False)
     gender = Column(String, nullable=False)
     phone = Column(String, nullable=False)
+    email = Column(String, nullable=True)
+    created_by = Column(Integer, nullable=True)

@@ -1,31 +1,27 @@
 from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
+from enum import Enum
 
 
-# =========================
-# REGISTER
-# =========================
+class UserRole(str, Enum):
+    admin = "admin"
+    doctor = "doctor"
+    patient = "patient"
+
+
 class UserRegister(BaseModel):
     name: str = Field(..., min_length=3, max_length=50)
     email: EmailStr
     password: str = Field(..., min_length=6, max_length=50)
-
-    # 🔥 اضف دي
-    role: str = Field(default="user")
+    role: UserRole = UserRole.patient
 
 
-# =========================
-# UPDATE PROFILE
-# =========================
 class UserUpdate(BaseModel):
     name: Optional[str] = Field(None, min_length=3, max_length=50)
     email: Optional[EmailStr] = None
     password: Optional[str] = Field(None, min_length=6, max_length=50)
 
 
-# =========================
-# RESPONSE
-# =========================
 class UserResponse(BaseModel):
     id: int
     name: str

@@ -1,218 +1,667 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Hospital System</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Appointment System</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial; margin:0; background:#f4f6f9; }
-
-        .navbar {
-            background:#2c3e50;
-            padding:15px;
-            display:flex;
-            gap:10px;
-        }
-
-        .navbar button {
-            background:#3498db;
-            border:none;
-            padding:10px;
-            color:white;
-            border-radius:5px;
-            cursor:pointer;
-        }
-
-        .container { padding:20px; }
-
-        .card {
-            background:white;
-            padding:15px;
-            margin-bottom:20px;
-            border-radius:10px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.1);
-        }
-
-        input {
-            display:block;
-            margin:5px 0;
-            padding:8px;
-            width:250px;
-        }
-
-        button.action {
-            background:#27ae60;
-            border:none;
-            padding:8px;
-            color:white;
-            border-radius:5px;
-            cursor:pointer;
-        }
-
-        ul { list-style:none; padding:0; }
-
-        li {
-            background:#ecf0f1;
-            margin:5px 0;
-            padding:10px;
-            border-radius:5px;
-        }
-
-        .danger {
-            background:red;
-            margin-left:10px;
-        }
+        :root { --bg:#0f1117;--surface:#1a1d27;--surface2:#222534;--border:#2e3247;--accent:#4f8ef7;--accent2:#38d9a9;--danger:#ff6b6b;--warning:#fcc419;--text:#e8eaf0;--text2:#8b90a7;--radius:12px; }
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex}
+        .sidebar{width:240px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:24px 0;position:fixed;height:100vh}
+        .logo{padding:0 24px 28px;border-bottom:1px solid var(--border)}
+        .logo h1{font-family:'Playfair Display',serif;font-size:18px;color:var(--accent);line-height:1.3}
+        .logo span{font-size:11px;color:var(--text2);letter-spacing:1px;text-transform:uppercase}
+        .nav{padding:20px 12px;flex:1}
+        .nav-item{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;cursor:pointer;color:var(--text2);font-size:14px;font-weight:500;transition:all .2s;margin-bottom:4px;border:none;background:none;width:100%;text-align:left}
+        .nav-item:hover{background:var(--surface2);color:var(--text)}
+        .nav-item.active{background:rgba(79,142,247,.15);color:var(--accent)}
+        .nav-item .icon{font-size:16px;width:20px;text-align:center}
+        .user-info{padding:16px;border-top:1px solid var(--border);margin:0 12px}
+        .user-badge{background:var(--surface2);border-radius:8px;padding:10px 12px;font-size:13px}
+        .user-badge .name{font-weight:600;color:var(--text)}
+        .user-badge .role{font-size:11px;color:var(--accent2);text-transform:uppercase;letter-spacing:.5px}
+        .logout-btn{width:100%;margin-top:8px;padding:8px;background:none;border:1px solid var(--border);border-radius:8px;color:var(--text2);font-size:13px;cursor:pointer;transition:all .2s}
+        .logout-btn:hover{border-color:var(--danger);color:var(--danger)}
+        .main{margin-left:240px;flex:1;padding:32px;min-height:100vh}
+        .page{display:none}.page.active{display:block}
+        .page-header{margin-bottom:28px}
+        .page-header h2{font-family:'Playfair Display',serif;font-size:26px;margin-bottom:4px}
+        .page-header p{color:var(--text2);font-size:14px}
+        .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+        .card h3{font-size:15px;font-weight:600;margin-bottom:16px;color:var(--text)}
+        .form-group{margin-bottom:14px}
+        .form-group label{display:block;font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:500;letter-spacing:.3px}
+        input,select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
+        input:focus,select:focus{border-color:var(--accent)}
+        .btn{padding:10px 20px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .2s}
+        .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{opacity:.85}
+        .btn-success{background:var(--accent2);color:#0f1117}.btn-success:hover{opacity:.85}
+        .btn-danger{background:var(--danger);color:#fff}.btn-danger:hover{opacity:.85}
+        .btn-sm{padding:6px 12px;font-size:12px}
+        .table-wrap{overflow-x:auto}
+        table{width:100%;border-collapse:collapse;font-size:14px}
+        th{text-align:left;padding:10px 14px;color:var(--text2);font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+        td{padding:12px 14px;border-bottom:1px solid var(--border);color:var(--text)}
+        tr:last-child td{border-bottom:none}
+        tr:hover td{background:var(--surface2)}
+        .badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+        .badge-blue{background:rgba(79,142,247,.15);color:var(--accent)}
+        .badge-green{background:rgba(56,217,169,.15);color:var(--accent2)}
+        .badge-red{background:rgba(255,107,107,.15);color:var(--danger)}
+        .badge-yellow{background:rgba(252,196,25,.15);color:var(--warning)}
+        .stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;margin-bottom:24px}
+        .stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+        .stat-card .label{font-size:12px;color:var(--text2);margin-bottom:8px}
+        .stat-card .value{font-size:28px;font-weight:600;color:var(--text)}
+        .stat-card .sub{font-size:12px;color:var(--accent2);margin-top:4px}
+        .auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);width:100%}
+        .auth-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;width:400px}
+        .auth-box h1{font-family:'Playfair Display',serif;font-size:24px;color:var(--accent);margin-bottom:4px}
+        .auth-box p{color:var(--text2);font-size:13px;margin-bottom:28px}
+        .auth-tabs{display:flex;gap:4px;background:var(--surface2);padding:4px;border-radius:8px;margin-bottom:24px}
+        .auth-tab{flex:1;padding:8px;border:none;border-radius:6px;background:none;color:var(--text2);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all .2s}
+        .auth-tab.active{background:var(--surface);color:var(--text)}
+        .alert{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:16px;display:none}
+        .alert-error{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);color:var(--danger)}
+        .alert-success{background:rgba(56,217,169,.1);border:1px solid rgba(56,217,169,.3);color:var(--accent2)}
+        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        .log-box{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:monospace;font-size:12px;color:var(--accent2);max-height:300px;overflow-y:auto;line-height:1.8}
+        .empty-state{text-align:center;padding:40px;color:var(--text2);font-size:14px}
+        .search-bar{display:flex;gap:10px;margin-bottom:16px}
+        .search-bar input{flex:1}
+        .msg-box{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px;display:none}
+        .msg-error{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);color:var(--danger)}
+        .msg-success{background:rgba(56,217,169,.1);border:1px solid rgba(56,217,169,.3);color:var(--accent2)}
+        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center}
+        .modal-box{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;width:450px}
+        #appShell{display:none}#authShell{display:flex}
     </style>
 </head>
-
 <body>
 
-<div class="navbar">
-    <button onclick="show('auth')">Auth</button>
-    <button onclick="show('doctors')">Doctors</button>
-    <button onclick="show('appointments')">My Appointments</button>
+<!-- AUTH -->
+<div id="authShell" class="auth-wrap">
+    <div class="auth-box">
+        <h1>🏥 MediBook</h1>
+        <p>Hospital Appointment System</p>
+        <div class="auth-tabs">
+            <button class="auth-tab active" onclick="switchTab('login')">Login</button>
+            <button class="auth-tab" onclick="switchTab('register')">Register</button>
+        </div>
+        <div id="authAlert" class="alert"></div>
+        <div id="loginForm">
+            <div class="form-group"><label>Email</label><input id="l_email" type="email" placeholder="doctor@hospital.com"></div>
+            <div class="form-group"><label>Password</label><input id="l_password" type="password" placeholder="••••••••"></div>
+            <button class="btn btn-primary" style="width:100%" onclick="login()">Sign In</button>
+        </div>
+        <div id="registerForm" style="display:none">
+            <div class="form-group"><label>Full Name</label><input id="r_name" placeholder="John Doe"></div>
+            <div class="form-group"><label>Email</label><input id="r_email" type="email" placeholder="john@email.com"></div>
+            <div class="form-group"><label>Password</label><input id="r_password" type="password" placeholder="••••••••"></div>
+            <div class="form-group">
+                <label>Role</label>
+                <select id="r_role">
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
+            <button class="btn btn-success" style="width:100%" onclick="register()">Create Account</button>
+        </div>
+    </div>
 </div>
 
-<div class="container">
+<!-- APP -->
+<div id="appShell" style="display:none;width:100%">
+  <div style="display:flex;width:100%">
+    <div class="sidebar">
+        <div class="logo"><h1>🏥 MediBook</h1><span>Hospital System</span></div>
+        <nav class="nav">
+            <button class="nav-item active" onclick="showPage('dashboard',event)"><span class="icon">📊</span> Dashboard</button>
+            <button class="nav-item" onclick="showPage('doctors',event)"><span class="icon">👨‍⚕️</span> Doctors</button>
+            <button class="nav-item" onclick="showPage('patients',event)"><span class="icon">🧑‍🤝‍🧑</span> Patients</button>
+            <button class="nav-item" onclick="showPage('appointments',event)"><span class="icon">📅</span> Appointments</button>
+            <button class="nav-item" id="monitoringNav" onclick="showPage('monitoring',event)" style="display:none"><span class="icon">🔍</span> Monitoring</button>
+        </nav>
+        <div class="user-info">
+            <div class="user-badge"><div class="name" id="sidebarName">-</div><div class="role" id="sidebarRole">-</div></div>
+            <button class="logout-btn" onclick="logout()">Sign Out</button>
+        </div>
+    </div>
 
-<div id="auth" class="card">
-    <h2>Login</h2>
-    <input id="email" placeholder="Email">
-    <input id="password" placeholder="Password">
-    <button class="action" onclick="login()">Login</button>
+    <div class="main">
 
-    <h3>Register</h3>
-    <input id="r_name" placeholder="Name">
-    <input id="r_email" placeholder="Email">
-    <input id="r_password" placeholder="Password">
-    <button class="action" onclick="register()">Register</button>
+      <!-- DASHBOARD -->
+      <div id="page-dashboard" class="page active">
+        <div class="page-header"><h2>Dashboard</h2><p>Welcome back, <span id="welcomeName">-</span></p></div>
+        <div class="stats-grid">
+            <div class="stat-card"><div class="label">Total Doctors</div><div class="value" id="statDoctors">-</div><div class="sub">registered</div></div>
+            <div class="stat-card"><div class="label">Appointments</div><div class="value" id="statAppointments">-</div><div class="sub">total</div></div>
+            <div class="stat-card"><div class="label">Status</div><div class="value" style="font-size:18px;color:var(--accent2)">🟢 Live</div><div class="sub">API running</div></div>
+        </div>
+      </div>
+
+      <!-- DOCTORS -->
+      <div id="page-doctors" class="page">
+        <div class="page-header"><h2>Doctors</h2><p>Hospital doctors</p></div>
+        <div class="card" id="addDoctorCard" style="display:none">
+            <h3>Add New Doctor</h3>
+            <div class="grid-2">
+                <div class="form-group"><label>Name</label><input id="d_name" placeholder="Dr. Smith"></div>
+                <div class="form-group"><label>Specialization</label><input id="d_spec" placeholder="Cardiology"></div>
+                <div class="form-group"><label>Email</label><input id="d_email" type="email" placeholder="doctor@hospital.com"></div>
+                <div class="form-group"><label>Phone</label><input id="d_phone" placeholder="01012345678"></div>
+            </div>
+            <button class="btn btn-success" onclick="addDoctor()">Add Doctor</button>
+        </div>
+        <div class="card">
+            <h3>Search by ID</h3>
+            <div class="search-bar">
+                <input id="search_doctor_id" type="number" placeholder="Enter Doctor ID">
+                <button class="btn btn-primary" onclick="searchDoctor()">Search</button>
+            </div>
+            <div id="doctorSearchResult"></div>
+        </div>
+        <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                <h3 style="margin:0">All Doctors</h3>
+                <button class="btn btn-primary btn-sm" onclick="getDoctors()">Refresh</button>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>ID</th><th>Name</th><th>Specialization</th><th>Actions</th></tr></thead>
+                    <tbody id="doctorsTable"><tr><td colspan="4" class="empty-state">Click Refresh to load</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+
+      <!-- PATIENTS -->
+      <div id="page-patients" class="page">
+        <div class="page-header"><h2>Patients</h2><p id="patientsSubtitle">Manage patients</p></div>
+        <div class="card">
+            <h3>Add Patient</h3>
+            <div id="patientMsg" class="msg-box"></div>
+            <div class="grid-2">
+                <div class="form-group"><label>Name</label><input id="p_name" placeholder="Ahmed Mohamed"></div>
+                <div class="form-group"><label>Age</label><input id="p_age" type="number" placeholder="30"></div>
+                <div class="form-group"><label>Gender</label><input id="p_gender" placeholder="Male / Female"></div>
+                <div class="form-group"><label>Phone</label><input id="p_phone" placeholder="01012345678"></div>
+                <div class="form-group"><label>Email</label><input id="p_email" type="email" placeholder="patient@email.com"></div>
+            </div>
+            <button class="btn btn-success" onclick="addPatient()">Add Patient</button>
+        </div>
+        <div class="card" id="searchPatientCard" style="display:none">
+            <h3>Search Patient by ID</h3>
+            <div class="search-bar">
+                <input id="search_patient_id" type="number" placeholder="Enter Patient ID">
+                <button class="btn btn-primary" onclick="searchPatient()">Search</button>
+            </div>
+            <div id="patientSearchResult"></div>
+        </div>
+        <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                <h3 style="margin:0" id="patientsTableTitle">My Patients</h3>
+                <button class="btn btn-primary btn-sm" onclick="getPatients()">Refresh</button>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>ID</th><th>Name</th><th>Age</th><th>Gender</th><th>Phone</th><th>Email</th><th>Actions</th></tr></thead>
+                    <tbody id="patientsTable"><tr><td colspan="7" class="empty-state">Click Refresh to load</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+
+      <!-- APPOINTMENTS -->
+      <div id="page-appointments" class="page">
+        <div class="page-header"><h2>Appointments</h2><p id="appointmentsSubtitle">Manage appointments</p></div>
+        <div class="card">
+            <h3>Book New Appointment</h3>
+            <div id="bookMsg" class="msg-box"></div>
+            <div class="grid-2">
+                <div class="form-group"><label>Doctor ID</label><input id="a_doctor" type="number" placeholder="1"></div>
+                <div class="form-group"><label>Date & Time</label><input id="a_date" type="datetime-local"></div>
+            </div>
+            <button class="btn btn-success" onclick="book()">Book Appointment</button>
+        </div>
+        <div class="card">
+            <h3>Search Appointment by ID</h3>
+            <div class="search-bar">
+                <input id="search_appt_id" type="number" placeholder="Enter Appointment ID">
+                <button class="btn btn-primary" onclick="searchAppointment()">Search</button>
+            </div>
+            <div id="apptSearchResult"></div>
+        </div>
+        <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                <h3 style="margin:0" id="appointmentsTableTitle">My Appointments</h3>
+                <button class="btn btn-primary btn-sm" onclick="getAppointments()">Refresh</button>
+            </div>
+            <div class="table-wrap">
+                <table>
+                    <thead><tr><th>ID</th><th>Doctor</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody id="appointmentsTable"><tr><td colspan="5" class="empty-state">Click Refresh to load</td></tr></tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+
+      <!-- MONITORING -->
+      <div id="page-monitoring" class="page">
+        <div class="page-header"><h2>Monitoring</h2><p>System health & logs</p></div>
+        <div class="stats-grid" id="monitoringStats"></div>
+        <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+                <h3 style="margin:0">Recent Logs</h3>
+                <button class="btn btn-primary btn-sm" onclick="loadMonitoring()">Refresh</button>
+            </div>
+            <div class="log-box" id="logsBox">Loading...</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
-<div id="doctors" class="card" style="display:none;">
-    <h2>Doctors</h2>
-    <button class="action" onclick="getDoctors()">Load</button>
-    <ul id="doctorsList"></ul>
+<!-- EDIT PATIENT MODAL -->
+<div id="editPatientModal" class="modal">
+    <div class="modal-box">
+        <h3 style="margin-bottom:20px;font-family:'Playfair Display',serif">Edit Patient</h3>
+        <input type="hidden" id="edit_patient_id">
+        <div class="form-group"><label>Name</label><input id="edit_name"></div>
+        <div class="form-group"><label>Age</label><input id="edit_age" type="number"></div>
+        <div class="form-group"><label>Gender</label><input id="edit_gender"></div>
+        <div class="form-group"><label>Phone</label><input id="edit_phone"></div>
+        <div class="form-group"><label>Email</label><input id="edit_email" type="email"></div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+            <button class="btn btn-success" onclick="saveEditPatient()">Save</button>
+            <button class="btn" style="background:var(--surface2);color:var(--text)" onclick="document.getElementById('editPatientModal').style.display='none'">Cancel</button>
+        </div>
+    </div>
 </div>
 
-<div id="appointments" class="card" style="display:none;">
-    <h2>My Appointments</h2>
-    <button class="action" onclick="getAppointments()">Load</button>
-    <ul id="appointmentsList"></ul>
-
-    <h3>Book</h3>
-    <input id="a_doctor" placeholder="Doctor ID">
-    <input id="a_date" placeholder="YYYY-MM-DD HH:MM">
-    <button class="action" onclick="book()">Book</button>
-</div>
-
+<!-- EDIT DOCTOR MODAL -->
+<div id="editDoctorModal" class="modal">
+    <div class="modal-box">
+        <h3 style="margin-bottom:20px;font-family:'Playfair Display',serif">Edit Doctor</h3>
+        <input type="hidden" id="edit_doctor_id">
+        <div class="form-group"><label>Name</label><input id="edit_d_name"></div>
+        <div class="form-group"><label>Specialization</label><input id="edit_d_spec"></div>
+        <div class="form-group"><label>Email</label><input id="edit_d_email" type="email"></div>
+        <div class="form-group"><label>Phone</label><input id="edit_d_phone"></div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+            <button class="btn btn-success" onclick="saveEditDoctor()">Save</button>
+            <button class="btn" style="background:var(--surface2);color:var(--text)" onclick="document.getElementById('editDoctorModal').style.display='none'">Cancel</button>
+        </div>
+    </div>
 </div>
 
 <script>
 const API = "http://127.0.0.1:8000";
+let token = localStorage.getItem("token");
+let currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
 
-function show(section){
-    ["auth","doctors","appointments"].forEach(id=>{
-        document.getElementById(id).style.display="none";
-    });
-    document.getElementById(section).style.display="block";
+if (token && currentUser) showApp();
+
+function switchTab(tab) {
+    document.querySelectorAll('.auth-tab').forEach((t,i) => t.classList.toggle('active', (i===0)===(tab==='login')));
+    document.getElementById('loginForm').style.display = tab==='login' ? 'block' : 'none';
+    document.getElementById('registerForm').style.display = tab==='register' ? 'block' : 'none';
+    document.getElementById('authAlert').style.display = 'none';
 }
 
-// LOGIN
-async function login(){
+function showAlert(msg, type='error') {
+    const el = document.getElementById('authAlert');
+    el.className = `alert alert-${type}`;
+    el.textContent = msg;
+    el.style.display = 'block';
+}
+
+function showMsg(id, msg, type='error') {
+    const el = document.getElementById(id);
+    el.className = `msg-box msg-${type}`;
+    el.textContent = msg;
+    el.style.display = 'block';
+    setTimeout(() => el.style.display='none', 4000);
+}
+
+async function login() {
+    const email = document.getElementById('l_email').value;
+    const password = document.getElementById('l_password').value;
+    if (!email || !password) return showAlert('Please fill all fields');
     let form = new URLSearchParams();
-    form.append("username", document.getElementById("email").value);
-    form.append("password", document.getElementById("password").value);
-
-    let res = await fetch(API+"/auth/login",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/x-www-form-urlencoded"
-        },
-        body:form
-    });
-
-    if(res.status !== 200){
-        alert("Login failed ❌");
-        return;
-    }
-
-    let data = await res.json();
-    localStorage.setItem("token", data.access_token);
-
-    alert("Logged in ✅");
-
-    show("doctors");
-    getDoctors();
+    form.append("username", email);
+    form.append("password", password);
+    try {
+        let res = await fetch(API+"/auth/login", { method:"POST", headers:{"Content-Type":"application/x-www-form-urlencoded"}, body:form });
+        let data = await res.json();
+        if (!res.ok) return showAlert(data.detail || 'Login failed');
+        token = data.access_token;
+        localStorage.setItem("token", token);
+        let profileRes = await fetch(API+"/profile", { headers:{"Authorization":"Bearer "+token} });
+        let profile = await profileRes.json();
+        currentUser = profile.user;
+        localStorage.setItem("currentUser", JSON.stringify(currentUser));
+        showApp();
+    } catch(e) { showAlert('Cannot connect to server. Is it running?'); }
 }
 
-// REGISTER
-async function register(){
-    let res = await fetch(API+"/auth/register",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json"
-        },
-        body:JSON.stringify({
-            name:r_name.value,
-            email:r_email.value,
-            password:r_password.value
-        })
-    });
+async function register() {
+    const name = document.getElementById('r_name').value;
+    const email = document.getElementById('r_email').value;
+    const password = document.getElementById('r_password').value;
+    const role = document.getElementById('r_role').value;
+    if (!name || !email || !password) return showAlert('Please fill all fields');
+    try {
+        let res = await fetch(API+"/auth/register", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({name,email,password,role}) });
+        let data = await res.json();
+        if (!res.ok) return showAlert(data.detail || 'Registration failed');
+        showAlert('Account created! Please login.', 'success');
+        switchTab('login');
+    } catch(e) { showAlert('Cannot connect to server.'); }
+}
 
-    if(res.status !== 200){
-        alert("Register failed ❌");
-        return;
+function logout() {
+    token=null; currentUser=null;
+    localStorage.removeItem("token"); localStorage.removeItem("currentUser");
+    document.getElementById('authShell').style.display='flex';
+    document.getElementById('appShell').style.display='none';
+}
+
+function showApp() {
+    document.getElementById('authShell').style.display='none';
+    document.getElementById('appShell').style.display='block';
+    document.getElementById('sidebarName').textContent = currentUser?.name||'-';
+    document.getElementById('sidebarRole').textContent = currentUser?.role||'-';
+    document.getElementById('welcomeName').textContent = currentUser?.name||'-';
+    const isAdmin = currentUser?.role==='admin';
+    const isDoctor = currentUser?.role==='doctor';
+
+    if (isAdmin) {
+        document.getElementById('monitoringNav').style.display='flex';
+        document.getElementById('addDoctorCard').style.display='block';
+        document.getElementById('searchPatientCard').style.display='block';
+        document.getElementById('patientsTableTitle').textContent='All Patients';
+        document.getElementById('appointmentsTableTitle').textContent='All Appointments';
+        document.getElementById('patientsSubtitle').textContent='Manage all patients';
+        document.getElementById('appointmentsSubtitle').textContent='Manage all appointments';
     }
+    if (isDoctor) {
+        document.getElementById('searchPatientCard').style.display='block';
+        document.getElementById('appointmentsTableTitle').textContent='All Appointments';
+        document.getElementById('appointmentsSubtitle').textContent='View and manage appointments';
+    }
+    loadDashboard();
+}
 
-    alert("Registered ✅");
+function showPage(name, event) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    document.getElementById('page-'+name).classList.add('active');
+    if (event) event.currentTarget.classList.add('active');
+    if (name==='doctors') getDoctors();
+    if (name==='appointments') getAppointments();
+    if (name==='patients') getPatients();
+    if (name==='monitoring') loadMonitoring();
+}
+
+async function loadDashboard() {
+    try {
+        let r1 = await fetch(API+"/doctors/");
+        let doctors = await r1.json();
+        document.getElementById('statDoctors').textContent = Array.isArray(doctors) ? doctors.length : '-';
+        const isAdminOrDoctor = ['admin','doctor'].includes(currentUser?.role);
+        const endpoint = isAdminOrDoctor ? "/appointments/" : "/appointments/my";
+        let r2 = await fetch(API+endpoint, { headers:{"Authorization":"Bearer "+token} });
+        let appts = await r2.json();
+        document.getElementById('statAppointments').textContent = Array.isArray(appts) ? appts.length : '-';
+    } catch(e) {}
 }
 
 // DOCTORS
-async function getDoctors(){
+async function getDoctors() {
     let res = await fetch(API+"/doctors/");
     let data = await res.json();
+    const isAdmin = currentUser?.role==='admin';
+    const tbody = document.getElementById('doctorsTable');
+    if (!data.length) { tbody.innerHTML='<tr><td colspan="4" class="empty-state">No doctors found</td></tr>'; return; }
+    tbody.innerHTML = data.map(d => `<tr>
+        <td>${d.id}</td><td><strong>${d.name}</strong></td>
+        <td><span class="badge badge-blue">${d.specialization}</span></td>
+        <td>${isAdmin ? `<button class="btn btn-primary btn-sm" onclick="openEditDoctor(${d.id},'${d.name}','${d.specialization}','${d.email||''}','${d.phone||''}')">Edit</button> <button class="btn btn-danger btn-sm" onclick="deleteDoctor(${d.id})">Delete</button>` : '-'}</td>
+    </tr>`).join('');
+}
 
-    doctorsList.innerHTML="";
-    data.forEach(d=>{
-        let li=document.createElement("li");
-        li.textContent = d.name + " - " + d.specialization;
-        doctorsList.appendChild(li);
-    });
+async function searchDoctor() {
+    const id = document.getElementById('search_doctor_id').value;
+    if (!id) return;
+    let res = await fetch(API+"/doctors/"+id);
+    const div = document.getElementById('doctorSearchResult');
+    if (!res.ok) { div.innerHTML='<p style="color:var(--danger);margin-top:8px">Doctor not found</p>'; return; }
+    let d = await res.json();
+    const isAdmin = currentUser?.role==='admin';
+    div.innerHTML = `<div style="background:var(--surface2);padding:14px;border-radius:8px;margin-top:8px">
+        <strong>${d.name}</strong> — ${d.specialization}<br>
+        <small style="color:var(--text2)">📧 ${d.email||'-'} | 📞 ${d.phone||'-'}</small>
+        ${isAdmin ? `<br><br><button class="btn btn-primary btn-sm" onclick="openEditDoctor(${d.id},'${d.name}','${d.specialization}','${d.email||''}','${d.phone||''}')">Edit</button> <button class="btn btn-danger btn-sm" onclick="deleteDoctor(${d.id})">Delete</button>` : ''}
+    </div>`;
+}
+
+async function addDoctor() {
+    const name=document.getElementById('d_name').value, specialization=document.getElementById('d_spec').value;
+    const email=document.getElementById('d_email').value, phone=document.getElementById('d_phone').value;
+    if (!name||!specialization||!email||!phone) return alert('Please fill all fields');
+    let res = await fetch(API+"/doctors/", { method:"POST", headers:{"Content-Type":"application/json","Authorization":"Bearer "+token}, body:JSON.stringify({name,specialization,email,phone}) });
+    if (!res.ok) { let e=await res.json(); return alert(e.detail||'Failed'); }
+    ['d_name','d_spec','d_email','d_phone'].forEach(id => document.getElementById(id).value='');
+    getDoctors();
+}
+
+function openEditDoctor(id,name,spec,email,phone) {
+    document.getElementById('edit_doctor_id').value=id;
+    document.getElementById('edit_d_name').value=name;
+    document.getElementById('edit_d_spec').value=spec;
+    document.getElementById('edit_d_email').value=email;
+    document.getElementById('edit_d_phone').value=phone;
+    document.getElementById('editDoctorModal').style.display='flex';
+}
+
+async function saveEditDoctor() {
+    const id=document.getElementById('edit_doctor_id').value;
+    const name=document.getElementById('edit_d_name').value, specialization=document.getElementById('edit_d_spec').value;
+    const email=document.getElementById('edit_d_email').value, phone=document.getElementById('edit_d_phone').value;
+    await fetch(API+"/doctors/"+id, { method:"PUT", headers:{"Content-Type":"application/json","Authorization":"Bearer "+token}, body:JSON.stringify({name,specialization,email,phone}) });
+    document.getElementById('editDoctorModal').style.display='none';
+    getDoctors();
+}
+
+async function deleteDoctor(id) {
+    if (!confirm('Delete this doctor?')) return;
+    await fetch(API+"/doctors/"+id, { method:"DELETE", headers:{"Authorization":"Bearer "+token} });
+    getDoctors();
+}
+
+// PATIENTS
+async function getPatients() {
+    const isAdmin = currentUser?.role==='admin';
+    const endpoint = isAdmin ? "/patients/" : "/patients/my";
+    let res = await fetch(API+endpoint, { headers:{"Authorization":"Bearer "+token} });
+    let data = await res.json();
+    const tbody = document.getElementById('patientsTable');
+    if (!Array.isArray(data)||!data.length) { tbody.innerHTML='<tr><td colspan="7" class="empty-state">No patients found</td></tr>'; return; }
+    tbody.innerHTML = data.map(p => `<tr>
+        <td>${p.id}</td><td><strong>${p.name}</strong></td><td>${p.age}</td>
+        <td><span class="badge badge-blue">${p.gender}</span></td>
+        <td>${p.phone}</td><td>${p.email||'-'}</td>
+        <td>
+            <button class="btn btn-primary btn-sm" onclick="openEditPatient(${p.id},'${p.name}',${p.age},'${p.gender}','${p.phone}','${p.email||''}')">Edit</button>
+            <button class="btn btn-danger btn-sm" onclick="deletePatient(${p.id})">Delete</button>
+        </td>
+    </tr>`).join('');
+}
+
+async function searchPatient() {
+    const id = document.getElementById('search_patient_id').value;
+    if (!id) return;
+    let res = await fetch(API+"/patients/"+id, { headers:{"Authorization":"Bearer "+token} });
+    const div = document.getElementById('patientSearchResult');
+    if (!res.ok) { div.innerHTML='<p style="color:var(--danger);margin-top:8px">Patient not found</p>'; return; }
+    let p = await res.json();
+    div.innerHTML = `<div style="background:var(--surface2);padding:14px;border-radius:8px;margin-top:8px">
+        <strong>${p.name}</strong> — ${p.age} yrs, ${p.gender}<br>
+        <small style="color:var(--text2)">📧 ${p.email||'-'} | 📞 ${p.phone}</small><br><br>
+        <button class="btn btn-primary btn-sm" onclick="openEditPatient(${p.id},'${p.name}',${p.age},'${p.gender}','${p.phone}','${p.email||''}')">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deletePatient(${p.id})">Delete</button>
+    </div>`;
+}
+
+async function addPatient() {
+    const name=document.getElementById('p_name').value, age=parseInt(document.getElementById('p_age').value);
+    const gender=document.getElementById('p_gender').value, phone=document.getElementById('p_phone').value;
+    const email=document.getElementById('p_email').value;
+    if (!name||!age||!gender||!phone) return showMsg('patientMsg','Please fill all required fields');
+    let res = await fetch(API+"/patients/", { method:"POST", headers:{"Content-Type":"application/json","Authorization":"Bearer "+token}, body:JSON.stringify({name,age,gender,phone,email}) });
+    if (!res.ok) { let e=await res.json(); return showMsg('patientMsg',e.detail||'Failed'); }
+    showMsg('patientMsg','Patient added successfully!','success');
+    ['p_name','p_age','p_gender','p_phone','p_email'].forEach(id => document.getElementById(id).value='');
+    getPatients();
+}
+
+function openEditPatient(id,name,age,gender,phone,email) {
+    document.getElementById('edit_patient_id').value=id;
+    document.getElementById('edit_name').value=name;
+    document.getElementById('edit_age').value=age;
+    document.getElementById('edit_gender').value=gender;
+    document.getElementById('edit_phone').value=phone;
+    document.getElementById('edit_email').value=email;
+    document.getElementById('editPatientModal').style.display='flex';
+}
+
+async function saveEditPatient() {
+    const id=document.getElementById('edit_patient_id').value;
+    const name=document.getElementById('edit_name').value, age=parseInt(document.getElementById('edit_age').value);
+    const gender=document.getElementById('edit_gender').value, phone=document.getElementById('edit_phone').value;
+    const email=document.getElementById('edit_email').value;
+    await fetch(API+"/patients/"+id, { method:"PUT", headers:{"Content-Type":"application/json","Authorization":"Bearer "+token}, body:JSON.stringify({name,age,gender,phone,email}) });
+    document.getElementById('editPatientModal').style.display='none';
+    getPatients();
+}
+
+async function deletePatient(id) {
+    if (!confirm('Delete this patient?')) return;
+    await fetch(API+"/patients/"+id, { method:"DELETE", headers:{"Authorization":"Bearer "+token} });
+    getPatients();
 }
 
 // APPOINTMENTS
-async function getAppointments(){
-    let res = await fetch(API+"/appointments/my",{
-        headers:{
-            "Authorization":"Bearer "+localStorage.getItem("token")
-        }
-    });
-
+async function getAppointments() {
+    const isAdmin = currentUser?.role==='admin';
+    const isDoctor = currentUser?.role==='doctor';
+    const endpoint = (isAdmin || isDoctor) ? "/appointments/" : "/appointments/my";
+    let res = await fetch(API+endpoint, { headers:{"Authorization":"Bearer "+token} });
     let data = await res.json();
-    appointmentsList.innerHTML="";
-
-    data.forEach(a=>{
-        let li=document.createElement("li");
-        li.textContent = "Doctor: "+a.doctor_id+" | "+a.appointment_date;
-        appointmentsList.appendChild(li);
-    });
+    const tbody = document.getElementById('appointmentsTable');
+    if (!Array.isArray(data)||!data.length) { tbody.innerHTML='<tr><td colspan="5" class="empty-state">No appointments found</td></tr>'; return; }
+    tbody.innerHTML = data.map(a => {
+        const sb = {'scheduled':'badge-blue','Pending':'badge-yellow','completed':'badge-green','cancelled':'badge-red'}[a.status]||'badge-yellow';
+        const dateVal = a.appointment_date ? a.appointment_date.replace(' ','T').slice(0,16) : '';
+        return `<tr>
+            <td>${a.id}</td><td>Doctor #${a.doctor_id}</td>
+            <td>${new Date(a.appointment_date).toLocaleString()}</td>
+            <td><span class="badge ${sb}">${a.status}</span></td>
+            <td>
+                <button class="btn btn-primary btn-sm" onclick="openEditAppointment(${a.id},${a.doctor_id},'${dateVal}')">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteAppointment(${a.id})">Delete</button>
+            </td>
+        </tr>`;
+    }).join('');
 }
 
-async function book(){
-    await fetch(API+"/appointments/",{
-        method:"POST",
-        headers:{
-            "Content-Type":"application/json",
-            "Authorization":"Bearer "+localStorage.getItem("token")
-        },
-        body:JSON.stringify({
-            doctor_id:parseInt(a_doctor.value),
-            appointment_date:a_date.value
-        })
-    });
+async function searchAppointment() {
+    const id = document.getElementById('search_appt_id').value;
+    if (!id) return;
+    let res = await fetch(API+"/appointments/"+id, { headers:{"Authorization":"Bearer "+token} });
+    const div = document.getElementById('apptSearchResult');
+    if (!res.ok) { div.innerHTML='<p style="color:var(--danger);margin-top:8px">Appointment not found</p>'; return; }
+    let a = await res.json();
+    const dateVal = a.appointment_date ? a.appointment_date.replace(' ','T').slice(0,16) : '';
+    div.innerHTML = `<div style="background:var(--surface2);padding:14px;border-radius:8px;margin-top:8px">
+        <strong>Appointment #${a.id}</strong> — Doctor #${a.doctor_id}<br>
+        <small style="color:var(--text2)">📅 ${new Date(a.appointment_date).toLocaleString()} | Status: ${a.status}</small><br><br>
+        <button class="btn btn-primary btn-sm" onclick="openEditAppointment(${a.id},${a.doctor_id},'${dateVal}')">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteAppointment(${a.id})">Delete</button>
+    </div>`;
+}
 
+function openEditAppointment(id, doctorId, date) {
+    document.getElementById('edit_appt_id').value = id;
+    document.getElementById('edit_appt_doctor').value = doctorId;
+    document.getElementById('edit_appt_date').value = date;
+    document.getElementById('editApptModal').style.display = 'flex';
+}
+
+async function saveEditAppointment() {
+    const id = document.getElementById('edit_appt_id').value;
+    const doctor_id = parseInt(document.getElementById('edit_appt_doctor').value);
+    const appointment_date = document.getElementById('edit_appt_date').value;
+    let res = await fetch(API+"/appointments/"+id, {
+        method:"PUT",
+        headers:{"Content-Type":"application/json","Authorization":"Bearer "+token},
+        body:JSON.stringify({doctor_id, appointment_date})
+    });
+    if (!res.ok) { let e=await res.json(); return alert(e.detail||'Failed'); }
+    document.getElementById('editApptModal').style.display='none';
     getAppointments();
 }
+
+async function deleteAppointment(id) {
+    if (!confirm('Delete this appointment?')) return;
+    await fetch(API+"/appointments/"+id, { method:"DELETE", headers:{"Authorization":"Bearer "+token} });
+    getAppointments();
+}
+
+async function book() {
+    const doctor_id=parseInt(document.getElementById('a_doctor').value);
+    const date=document.getElementById('a_date').value;
+    if (!doctor_id||!date) return showMsg('bookMsg','Please fill all fields');
+    let res = await fetch(API+"/appointments/", { method:"POST", headers:{"Content-Type":"application/json","Authorization":"Bearer "+token}, body:JSON.stringify({doctor_id,appointment_date:date}) });
+    if (!res.ok) { let e=await res.json(); return showMsg('bookMsg', e.detail||'This time slot is already booked. Please choose a different time (at least 1 hour apart).'); }
+    showMsg('bookMsg','Appointment booked successfully!','success');
+    getAppointments();
+}
+
+// MONITORING
+async function loadMonitoring() {
+    try {
+        let res = await fetch(API+"/monitoring/stats", { headers:{"Authorization":"Bearer "+token} });
+        let data = await res.json();
+        document.getElementById('monitoringStats').innerHTML = `
+            <div class="stat-card"><div class="label">Total Requests</div><div class="value">${data.total_requests}</div></div>
+            <div class="stat-card"><div class="label">Total Errors</div><div class="value" style="color:var(--danger)">${data.total_errors}</div></div>
+            <div class="stat-card"><div class="label">Error Rate</div><div class="value" style="font-size:20px">${data.error_rate}</div></div>
+            <div class="stat-card"><div class="label">Status</div><div class="value" style="font-size:18px;color:var(--accent2)">🟢 ${data.status}</div></div>`;
+        let logRes = await fetch(API+"/monitoring/logs", { headers:{"Authorization":"Bearer "+token} });
+        let logData = await logRes.json();
+        document.getElementById('logsBox').innerHTML = (logData.recent_logs||[]).join('<br>')||'No logs yet';
+    } catch(e) { document.getElementById('logsBox').textContent='Error loading monitoring data'; }
+}
 </script>
+<!-- EDIT APPOINTMENT MODAL -->
+<div id="editApptModal" class="modal">
+    <div class="modal-box">
+        <h3 style="margin-bottom:20px;font-family:'Playfair Display',serif">Edit Appointment</h3>
+        <input type="hidden" id="edit_appt_id">
+        <div class="form-group"><label>Doctor ID</label><input id="edit_appt_doctor" type="number"></div>
+        <div class="form-group"><label>Date & Time</label><input id="edit_appt_date" type="datetime-local"></div>
+        <div style="display:flex;gap:10px;margin-top:20px">
+            <button class="btn btn-success" onclick="saveEditAppointment()">Save</button>
+            <button class="btn" style="background:var(--surface2);color:var(--text)" onclick="document.getElementById('editApptModal').style.display='none'">Cancel</button>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
